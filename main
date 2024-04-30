@@ -1,0 +1,73 @@
+
+repeat task.wait() until game:IsLoaded()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ZekzV2/Extras/main/Global"))()
+if KeySystem then
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/ZekzV2/Key/main/Main%20System'))()
+end
+if Advertisement then
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/ZekzV2/Advert/main/AdMain"))()
+end
+local StartTime = tick()
+local A = loadstring(game:HttpGet("https://raw.githubusercontent.com/ZekzV2/Gamelisting-/main/List"))()
+
+local BlurEffect = Instance.new("BlurEffect")
+BlurEffect.Parent = Lighting
+BlurEffect.Size = 0
+local ScreenGui = Instance.new("ScreenGui")
+if syn and syn.protect_gui then
+	syn.protect_gui(ScreenGui)
+	ScreenGui.Parent = CoreGui
+elseif gethui then
+	ScreenGui.Parent = gethui()
+else
+	ScreenGui.Parent = CoreGui
+end
+
+local ImageLabel = Instance.new("ImageLabel")
+ImageLabel.Parent = ScreenGui
+ImageLabel.BackgroundColor3 = Color3.new(1, 1, 1)
+ImageLabel.BackgroundTransparency = 1
+ImageLabel.Position = UDim2.new(0.5, -(303 / 2), 0.5, -(263 / 2))
+ImageLabel.Rotation = 0
+ImageLabel.Size = UDim2.new(0, 303, 0, 263)
+ImageLabel.Image = "rbxassetid://8429081004"
+ImageLabel.ImageTransparency = 1
+
+for Index = 1, 50, 2 do
+	BlurEffect.Size = Index
+	ImageLabel.ImageTransparency = ImageLabel.ImageTransparency - 0.1
+	wait()
+end
+
+wait(.1)
+ImageLabel:TweenPosition(UDim2.new(0.5, 342 / 1, 0.5, 263 / 2, Enum.EasingDirection.Out, Enum.EasingStyle.Quint, 0.5))
+wait(.1)
+
+BlurEffect:Destroy()
+ScreenGui:Destroy()
+
+
+for i, v in next, A do
+	if i == game.GameId or i == game.PlaceId then
+		loadstring(game:HttpGet(v))()
+	end
+end
+--Toxic Mods screen thingy And Kiriot22 esp, IY for fly script inspiration, Staylin Save Settings, Felix for being sexy, E621 Anticheat bypass
+
+print("Took ", tick() - StartTime, " To Load <3")
+
+local function Copy()
+	setclipboard("https://discord.gg/Incensescript")
+end
+local Gang = Instance.new("BindableFunction")
+
+function Gang.OnInvoke(v)
+	if v == "Yes" then
+		Copy()
+		VG.SendNotification("Discord", "Discord Link Copying Successful", "rbxassetid://8429081004", 15)
+	end
+end
+
+StarterGui:SetCore("SendNotification",{ Title = "Incense Discord", Text = "Copy to clipboard?", Duration = 5, Callback = Gang, Button1 = "Yes", Button2 ="No" })
+wait(5)
+----------------------------------------------------------------------------------------------
